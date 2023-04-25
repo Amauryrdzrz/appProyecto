@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void QR() {
-        String url = "192.168.10.4/validaqr";
+        String url = "192.168.10.4/prueba2";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 response -> {
