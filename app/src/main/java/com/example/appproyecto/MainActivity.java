@@ -1,15 +1,15 @@
 package com.example.appproyecto;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.android.volley.Request;
+import com.android.volley.toolbox.StringRequest;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -43,6 +43,20 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void QR() {
+        String url = "192.168.10.4/validaqr";
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                response -> {
+                    Toast.makeText(MainActivity.this, response, Toast.LENGTH_SHORT).show();
+                },
+                error -> {
+                    Toast.makeText(MainActivity.this, "codigoerroneo", Toast.LENGTH_SHORT).show();
+                    ;
+                }) {
+
+        };
+    }
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
@@ -51,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
             if(result.getContents() == null){
                 Toast.makeText(this, "Lectura Cancelada", Toast.LENGTH_LONG).show();
             } else {
-                Toast.makeText(this, result.getContents() , Toast.LENGTH_LONG).show();
+                QR();
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
