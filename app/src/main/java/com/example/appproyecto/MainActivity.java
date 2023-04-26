@@ -10,9 +10,14 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -50,6 +55,27 @@ public class MainActivity extends AppCompatActivity {
         String url = "192.168.10.4/calis";
 
 
+        StringRequest stringRequestGet = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                JSONObject jsonObject = null;
+                try {
+                    jsonObject = new JSONObject(response);
+                    txtCode.setText(jsonObject.getString(""));
+
+                } catch (JSONException e) {
+                   e.printStackTrace();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 response -> {
                     Toast.makeText(MainActivity.this, response, Toast.LENGTH_SHORT).show();
