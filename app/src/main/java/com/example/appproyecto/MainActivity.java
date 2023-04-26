@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +17,7 @@ import com.google.zxing.integration.android.IntentResult;
 public class MainActivity extends AppCompatActivity {
 
     Button btnScan;
+    EditText txtCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         btnScan = findViewById(R.id.btnScan);
+        txtCode = findViewById(R.id.txtCode);
 
         btnScan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,7 +47,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void QR() {
-        String url = "192.168.10.4/prueba2";
+        String url = "192.168.10.4/calis";
+
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 response -> {
