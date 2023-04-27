@@ -7,7 +7,7 @@ import retrofit2.http.*
 
 interface ApiService {
 
-    @POST(value = "calis")
+    @GET(value = "calis")
     fun validateCode(@Query(value="codigo")code:String):
             Call<Void>
 
